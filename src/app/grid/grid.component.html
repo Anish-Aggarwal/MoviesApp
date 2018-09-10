@@ -1,0 +1,35 @@
+<div class="well">
+    <div class="form-group row">
+
+        <label class="col-sm-1 col-form-label" for="filtername">Filter Name</label>
+        <div class="col-sm-6">
+            <select id="filtername" class="form-control" (change)="onFilterChange()" name="filtername">
+                <option value=""></option>
+                <option *ngFor="let c of columns" value="{{c}}">{{c}}</option>
+            </select>
+        </div>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="Filter Value">
+        </div>
+    </div>
+    <!-- <button class="btn btn-primary" (click)="onResetClick()">Reset</button> -->
+</div>
+
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="column" *ngFor="let c of columns">{{c}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let movie of movieObj">
+                <td *ngFor="let c of columns">
+                    {{movie[c]}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <pagination [total-items]="totalItems" [page-size]="pageSize" (page-changed)="onPageChanged($event)"></pagination>
+</div>
